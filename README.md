@@ -36,12 +36,12 @@ pequod tag myImage /path/to/tagFile.json
 
 ### Automatically push according to what's in .buildinfo.json
 ```bash
-pequod push-tags
+pequod pushTags
 ```
 
 ### Using a custom json file with a `tag` property
 ```bash
-pequod push-tags myImage /path/to/tagFile.json
+pequod pushTags myImage /path/to/tagFile.json
 ```
 
 There's more to it than this, but give this is really the primary reason for its existence, I'm gonna keep things boring for now √
