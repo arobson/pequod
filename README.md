@@ -7,6 +7,19 @@ Primary use case (for now) is to read the `.buildinfo.json` file and tag a Docke
 [![Build Status][travis-image]][travis-url]
 [![Coverage Status][coveralls-image]][coveralls-url]
 
+## Testing
+A local Docker registry for the push integration tests.
+
+__Start local registry__
+```bash
+./setup-registry.sh
+```
+
+__Tear down local registry__
+```bash
+./kill-registry.sh
+```
+
 ## Tagging
 
 ### Automatically tag according to what's in .buildinfo.json
@@ -17,6 +30,18 @@ pequod tag myImage
 ### Using a custom json file with a `tag` property
 ```bash
 pequod tag myImage /path/to/tagFile.json
+```
+
+## Pushing Built Tags
+
+### Automatically push according to what's in .buildinfo.json
+```bash
+pequod push-tags
+```
+
+### Using a custom json file with a `tag` property
+```bash
+pequod push-tags myImage /path/to/tagFile.json
 ```
 
 There's more to it than this, but give this is really the primary reason for its existence, I'm gonna keep things boring for now √

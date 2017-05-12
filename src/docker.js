@@ -1,4 +1,5 @@
 var when = require( "when" );
+var format = require( "util" ).format;
 var spawn = require( "child_process" ).spawn;
 
 function exec( sudo, command, args ) {
@@ -16,7 +17,7 @@ function exec( sudo, command, args ) {
     } );
     pid.on( "close", function( code ) {
       if( code != 0 || err.length > 0 ) {
-        var error = new Error( "docker command failed with" );
+        var error = new Error( format( "docker command '%s', failed with\n %s", command, err.join( "\n" ) ) );
         error.command = command;
         error.args = args;
         error.output = err;
@@ -31,6 +32,10 @@ function exec( sudo, command, args ) {
 
 function info( sudo ) {
   return exec( sudo, "info" );
+}
+
+function push( sudo, image ) {
+  return exec( sudo, "push", image );
 }
 
 function tag( sudo, source, target ) {
@@ -48,6 +53,7 @@ function version( sudo ) {
 module.exports = function( sudo ) {
   return {
     info: info.bind( null, sudo ),
+    push: push.bind( null, sudo ),
     removeImage: removeImage.bind( null, sudo ),
     tag: tag.bind( null, sudo ),
     version: version.bind( null, sudo )

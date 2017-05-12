@@ -10,9 +10,13 @@ os:
 
 before_script:
   - docker pull alpine:3.4
+  - ./start-registry.sh
 
 script:
   - nyc npm test && nyc report --reporter=text-lcov | coveralls
+
+after_script:
+  - ./kill-registry.sh
 
 node_js:
   - "4"

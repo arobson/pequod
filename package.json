@@ -1,13 +1,15 @@
 {
   "name": "pequod",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "utility for issuing Docker CLI commands (image tagging)",
   "main": "src/docker.js",
   "bin": {
     "pequod": "./bin/pequod"
   },
   "scripts": {
-    "test": "./node_modules/mocha/bin/mocha spec/*.spec.js"
+    "test": "./node_modules/mocha/bin/mocha spec/*.spec.js",
+    "coverage": "nyc npm test",
+    "continuous": "./node_modules/mocha/bin/mocha spec/*.spec.js -w"
   },
   "repository": {
     "type": "git",

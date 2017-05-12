@@ -34,4 +34,13 @@ describe( "Adapter", function() {
       return docker.removeImage( "alpine:magic" );
     } );
   } );
+
+  describe( "push tag", function() {
+    it( "should push tag", function() {
+      return adapter.tag( { _: [ "tag", "alpine:3.4", "localhost:5080/alpine:custom" ] } )
+        .then( function() {
+          return adapter.pushTags( { _: [ "push", "localhost:5080/alpine", "custom" ] } )
+        } ).should.be.fulfilled;
+    } );
+  } )
 } );
