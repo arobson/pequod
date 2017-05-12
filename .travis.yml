@@ -1,0 +1,19 @@
+sudo: required
+
+services:
+  - docker
+
+language: node_js
+
+os:
+  - linux
+
+before_script:
+  - docker pull alpine:3.4
+
+script:
+  - nyc npm test && nyc report --reporter=text-lcov | coveralls
+
+node_js:
+  - "4"
+  - "6"
