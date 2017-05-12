@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker run -d --name pequod-registry --rm -p 5080:5000 registry:2
+docker run -d --name pequod-registry -p 5080:5000 registry:2
