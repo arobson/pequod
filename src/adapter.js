@@ -36,10 +36,13 @@ function tag( tagImpl, argv ) {
 
 module.exports = function( docker ) {
   var tagImpl = Tags( docker );
-
   return {
+    build: docker.build,
     info: docker.info,
+    login: docker.login,
+    push: docker.push,
     pushTags: pushTags.bind( null, tagImpl ),
+    removeImage: docker.removeImage,
     tag: tag.bind( null, tagImpl ),
     version: docker.version
   }
