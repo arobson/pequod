@@ -1,6 +1,6 @@
 {
   "name": "pequod",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "utility for issuing Docker CLI commands (image tagging)",
   "main": "src/index.js",
   "bin": {
