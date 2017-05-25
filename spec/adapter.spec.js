@@ -21,7 +21,7 @@ describe( "Adapter", function() {
   describe( "build", function() {
     it( "should build image", function() {
       this.timeout( 20000 );
-      return adapter.build( "./spec", "test-image", "Dockerfile.test" )
+      return adapter.build( "test-image", "./spec", "Dockerfile.test" )
         .should.be.fulfilled;
     } );
   } );
