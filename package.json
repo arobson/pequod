@@ -9,7 +9,8 @@
   "scripts": {
     "test": "./node_modules/mocha/bin/mocha spec/*.spec.js",
     "coverage": "nyc npm test",
-    "continuous": "./node_modules/mocha/bin/mocha spec/*.spec.js -w"
+    "continuous": "./node_modules/mocha/bin/mocha spec/*.spec.js -w",
+    "release": "standard-version"
   },
   "repository": {
     "type": "git",
@@ -37,6 +38,7 @@
     "mocha-lcov-reporter": "^1.3.0",
     "nyc": "^10.3.2",
     "sinon": "^2.2.0",
-    "sinon-chai": "^2.10.0"
+    "sinon-chai": "^2.10.0",
+    "standard-version": "^4.0.0"
   }
 }
