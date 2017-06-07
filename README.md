@@ -58,8 +58,10 @@ pequod pushTags myImage /path/to/tagFile.json
 All calls return promises which resolve or reject with the output of the command.
 
 ```js
-var pequod = require( "pequod" )( false ); // sets sudo to false
+var pequod = require( "pequod" )( false, logger ); // sets sudo to false
 ```
+
+ * logger - optional log call that accepts string output from Docker process
 
 #### build( tag, _workingPath_, _file_ )
 `workingPath` and `file` are optional.
