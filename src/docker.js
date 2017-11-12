@@ -16,7 +16,11 @@ function exec (sudo, log, command, args) {
     })
     pid.stderr.on('data', function (data) {
       log(data.toString())
-      err.push(data.toString())
+      if (/^WARNING!/.test(data.toString())) {
+        out.push(data.toString())
+      } else {
+        err.push(data.toString())
+      }
     })
     pid.on('close', function (code) {
       if (code !== 0 || err.length > 0) {
