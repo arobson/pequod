@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.3.1"></a>
+## [1.3.1](https://github.com/arobson/pequod/compare/v1.3.0...v1.3.1) (2017-11-12)
+
+
+### Bug Fixes
+
+* add standard and correct linting errors ([f4b4b82](https://github.com/arobson/pequod/commit/f4b4b82))
+* don't treat warning output from Docker CLIs as errors ([655f464](https://github.com/arobson/pequod/commit/655f464))
+
+
+
 <a name="1.3.0"></a>
 # [1.3.0](https://github.com/arobson/pequod/compare/v1.2.0...v1.3.0) (2017-06-07)
 
