@@ -7,6 +7,8 @@
     "pequod": "./bin/pequod"
   },
   "scripts": {
+    "pretest": "standard",
+    "standard": "standard --fix",
     "test": "./node_modules/mocha/bin/mocha spec/*.spec.js",
     "coverage": "nyc npm test",
     "continuous": "./node_modules/mocha/bin/mocha spec/*.spec.js -w",
@@ -39,6 +41,16 @@
     "nyc": "^10.3.2",
     "sinon": "^2.2.0",
     "sinon-chai": "^2.10.0",
+    "standard": "^10.0.3",
     "standard-version": "^4.0.0"
+  },
+  "standard": {
+    "env": [
+      "mocha"
+    ],
+    "globals": [
+      "sinon",
+      "expect"
+    ]
   }
 }

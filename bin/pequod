@@ -4,7 +4,7 @@ var argv = require( "yargs" )
   .demandCommand(1)
   .argv;
 
-var docker = require( "../src/docker.js" )( argv.sudo );
+var docker = require( "../src/docker.js" )( { sudo: argv.sudo, log: console.log } );
 var adapter = require( "../src/adapter.js" )( docker );
 
 var commandName = argv._[ 0 ];
