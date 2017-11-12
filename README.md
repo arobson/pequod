@@ -156,7 +156,7 @@ pequod
 
 There's more to it than this, but give this is really the primary reason for its existence, I'm gonna keep things boring for now √
 
-[travis-url]: https://travis-ci.org/arobson/pequod
-[travis-image]: https://travis-ci.org/arobson/pequod.svg?branch=master
-[coveralls-url]: https://coveralls.io/github/arobson/pequod?branch=master
-[coveralls-image]: https://coveralls.io/repos/github/arobson/pequod/badge.svg?branch=master
+[travis-url]: https://travis-ci.org/npm-wharf/pequod
+[travis-image]: https://travis-ci.org/npm-wharf/pequod.svg?branch=master
+[coveralls-url]: https://coveralls.io/github/npm-wharf/pequod?branch=master
+[coveralls-image]: https://coveralls.io/repos/github/npm-wharf/pequod/badge.svg?branch=master
