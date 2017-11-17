@@ -37,9 +37,13 @@ function exec (sudo, log, command, args) {
   })
 }
 
-function build (sudo, log, tag, workingPath, file) {
+function build (sudo, log, tag, workingPath, file, cacheFrom) {
   var dockerfilePath = path.join(workingPath, file || './Dockerfile')
-  return exec(sudo, log, 'build', [ workingPath, '-f', dockerfilePath, '-t', tag ])
+  var args = [ workingPath, '-f', dockerfilePath, '-t', tag ]
+  if (cacheFrom) {
+    args = args.concat(['--cache-from', cacheFrom])
+  }
+  return exec(sudo, log, 'build', args)
 }
 
 function info (sudo, log) {

@@ -1,5 +1,13 @@
 var Tags = require('./tags')
 
+function build (docker, argv) {
+  if (Array.isArray(argv)) {
+    return docker.build.apply(null, argv)
+  } else {
+    return docker.build(argv.tag, argv.working, argv.file, argv.cacheFrom)
+  }
+}
+
 function pushTags (tagImpl, argv) {
   var source
   var tags
@@ -37,7 +45,7 @@ function tag (tagImpl, argv) {
 module.exports = function (docker) {
   var tagImpl = Tags(docker)
   return {
-    build: docker.build,
+    build: build.bind(null, docker),
     info: docker.info,
     login: docker.login,
     push: docker.push,

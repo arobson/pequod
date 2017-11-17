@@ -20,40 +20,6 @@ __Tear down local registry__
 ./kill-registry.sh
 ```
 
-## Login
-```bash
-
-```
-
-## Build
-```bash
-
-```
-
-## Tagging
-
-### Automatically tag according to what's in .buildinfo.json
-```bash
-pequod tag myImage
-```
-
-### Using a custom json file with a `tag` property
-```bash
-pequod tag myImage /path/to/tagFile.json
-```
-
-## Pushing Built Tags
-
-### Automatically push according to what's in .buildinfo.json
-```bash
-pequod pushTags
-```
-
-### Using a custom json file with a `tag` property
-```bash
-pequod pushTags myImage /path/to/tagFile.json
-```
-
 ## API
 All calls return promises which resolve or reject with the output of the command.
 
@@ -63,11 +29,12 @@ var pequod = require( "pequod" )( false, logger ); // sets sudo to false
 
  * logger - optional log call that accepts string output from Docker process
 
-#### build( tag, _workingPath_, _file_ )
-`workingPath` and `file` are optional.
+#### build( tag, _workingPath_, _file_, _cacheFrom_ )
+`workingPath`, `file`, and _cacheFrom_ are optional.
 
  * `workingPath` - default: "./"
  * `file` - default: "Dockerfile"
+ * `cacheFrom` - provide a image specification for Docker to build off of
 
 ```js
 pequod

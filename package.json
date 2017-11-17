@@ -4,7 +4,7 @@
   "description": "utility for issuing Docker CLI commands (image tagging)",
   "main": "src/index.js",
   "bin": {
-    "pequod": "./bin/pequod"
+    "pequod": "./bin/pequod.js"
   },
   "scripts": {
     "pretest": "standard",
