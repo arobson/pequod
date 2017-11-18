@@ -7,6 +7,7 @@ module.exports = function (options) {
     build: docker.build,
     info: docker.info,
     login: docker.login,
+    pull: docker.pull,
     push: docker.push,
     pushTags: tagImpl.pushTags,
     removeImage: docker.removeImage,
