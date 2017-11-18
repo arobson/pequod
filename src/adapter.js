@@ -48,6 +48,7 @@ module.exports = function (docker) {
     build: build.bind(null, docker),
     info: docker.info,
     login: docker.login,
+    pull: docker.pull,
     push: docker.push,
     pushTags: pushTags.bind(null, tagImpl),
     removeImage: docker.removeImage,

@@ -92,4 +92,19 @@ describe('Adapter', function () {
         }).should.be.fulfilled
     })
   })
+
+  describe('pull image', function () {
+    before(function () {
+      return docker.removeImage('localhost:5080/alpine:custom')
+    })
+
+    it('should pull image', function () {
+      return adapter.pull('localhost:5080/alpine:custom')
+        .should.be.fulfilled
+    })
+
+    after(function () {
+      return docker.removeImage('localhost:5080/alpine:custom')
+    })
+  })
 })

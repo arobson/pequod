@@ -65,6 +65,17 @@ pequod
   } );
 ```
 
+#### pull( image )
+Pulls an image.
+
+```js
+pequod
+  .pull( "test-image" )
+  .then( function( list ) {
+    // the list of console lines output
+  } );
+```
+
 #### push( image )
 Pushes the image.
 

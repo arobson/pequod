@@ -58,6 +58,10 @@ function login (sudo, log, user, pass, server) {
   return exec(sudo, log, 'login', argList)
 }
 
+function pull (sudo, log, image) {
+  return exec(sudo, log, 'pull', image)
+}
+
 function push (sudo, log, image) {
   return exec(sudo, log, 'push', image)
 }
@@ -81,6 +85,7 @@ module.exports = function (options) {
     build: build.bind(null, sudo, log),
     info: info.bind(null, sudo, log),
     login: login.bind(null, sudo, log),
+    pull: pull.bind(null, sudo, log),
     push: push.bind(null, sudo, log),
     removeImage: removeImage.bind(null, sudo, log),
     tag: tag.bind(null, sudo, log),
