@@ -66,7 +66,7 @@ describe('Tags', function () {
     })
   })
 
-  describe('when tagging from file', function () {
+  describe('when tagging from file with single tag', function () {
     var dockerMock
     var tags
     before(function () {

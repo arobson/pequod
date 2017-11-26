@@ -48,7 +48,13 @@ function pushTag (docker, target) {
 
 function pushTags (docker, source, tag) {
   if (Array.isArray(tag)) {
-    return when.all(tag.map(pushTags.bind(null, docker, source)))
+    const promises = tag.reduce((acc, t) => {
+      if (t && t !== '') {
+        acc.push(pushTags(docker, source, t))
+      }
+      return acc
+    }, [])
+    return when.all(promises)
   } else {
     var target = tag
     if (!tagIsCompleteSpec(tag)) {
@@ -75,7 +81,13 @@ function selectTags (docker, op, source, tag) {
 
 function tagImage (docker, source, tag) {
   if (Array.isArray(tag)) {
-    return when.all(tag.map(tagImage.bind(null, docker, source)))
+    const promises = tag.reduce((acc, t) => {
+      if (t && t !== '') {
+        acc.push(tagImage(docker, source, t))
+      }
+      return acc
+    }, [])
+    return when.all(promises)
   } else {
     var target = tag
     if (!tagIsCompleteSpec(tag)) {
