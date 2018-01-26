@@ -26,8 +26,27 @@ describe('Adapter', function () {
 
     it('should build image with hash argv and cacheFrom', function () {
       this.timeout(20000)
-      return adapter.build({tag: 'test-image', working: './spec', file: 'Dockerfile.test', cacheFrom: 'test-image:latest'})
-        .should.be.fulfilled
+      return adapter.build({
+        tag: 'test-image',
+        working: './spec',
+        file: 'Dockerfile.test',
+        cacheFrom: 'test-image:latest'
+      })
+      .should.be.fulfilled
+    })
+
+    it('should build image with hash argv, build args and cacheFrom', function () {
+      this.timeout(20000)
+      return adapter.build({
+        tag: 'test-image',
+        working: './spec',
+        file: 'Dockerfile.args',
+        cacheFrom: 'test-image:latest',
+        args: {
+          package: 'curl'
+        }
+      })
+      .should.be.fulfilled
     })
 
     it('should build image with array argv', function () {
