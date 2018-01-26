@@ -30,11 +30,15 @@ var pequod = require( "pequod" )( false, logger ); // sets sudo to false
  * logger - optional log call that accepts string output from Docker process
 
 #### build( tag, _workingPath_, _file_, _cacheFrom_ )
-`workingPath`, `file`, and _cacheFrom_ are optional.
 
- * `workingPath` - default: "./"
+#### `build ( tag, [options] )`
+
+`options` is a hash of fields:
+
+ * `working` - default: "./"
  * `file` - default: "Dockerfile"
  * `cacheFrom` - provide a image specification for Docker to build off of
+ * `args` - a hash of key/values used to populate `ARG`s defined in the Dockerfile
 
 ```js
 pequod

@@ -37,13 +37,32 @@ function exec (sudo, log, command, args) {
   })
 }
 
-function build (sudo, log, tag, workingPath, file, cacheFrom) {
-  var dockerfilePath = path.join(workingPath, file || './Dockerfile')
+function build (sudo, log, tag, options = {}) {
+  const workingPath = options.working || process.cwd()
+  const file = options.file || 'Dockerfile'
+  const cacheFrom = options.cacheFrom
+  const buildArgs = getBuildArgs(options.args)
+  const dockerfilePath = path.resolve(workingPath, file)
   var args = [ workingPath, '-f', dockerfilePath, '-t', tag ]
   if (cacheFrom) {
     args = args.concat(['--cache-from', cacheFrom])
   }
+  if (buildArgs) {
+    args = buildArgs.concat(args)
+  }
   return exec(sudo, log, 'build', args)
+}
+
+function getBuildArgs (args) {
+  if (args) {
+    const keys = Object.keys(args)
+    return keys.reduce((acc, k) => {
+      acc.push('--build-arg')
+      acc.push(`${k}=${args[k]}`)
+      return acc
+    }, [])
+  }
+  return undefined
 }
 
 function info (sudo, log) {

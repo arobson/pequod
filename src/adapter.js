@@ -2,9 +2,16 @@ var Tags = require('./tags')
 
 function build (docker, argv) {
   if (Array.isArray(argv)) {
-    return docker.build.apply(null, argv)
+    const tag = argv[0]
+    const options = {
+      working: argv[1],
+      file: argv[2],
+      cacheFrom: argv[3],
+      args: argv[4]
+    }
+    return docker.build(tag, options)
   } else {
-    return docker.build(argv.tag, argv.working, argv.file, argv.cacheFrom)
+    return docker.build(argv.tag, argv)
   }
 }
 
