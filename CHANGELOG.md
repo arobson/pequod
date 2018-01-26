@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.6.0"></a>
+# [1.6.0](https://github.com/arobson/pequod/compare/v1.5.2...v1.6.0) (2018-01-26)
+
+
+### Features
+
+* add support for build-args in order to support parameterized Dockerfiles better ([f0e8b26](https://github.com/arobson/pequod/commit/f0e8b26))
+
+
+
 <a name="1.5.2"></a>
 ## [1.5.2](https://github.com/arobson/pequod/compare/v1.5.1...v1.5.2) (2017-11-26)
 
