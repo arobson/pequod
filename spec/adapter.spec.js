@@ -26,32 +26,61 @@ describe('Adapter', function () {
 
     it('should build image with hash argv and cacheFrom', function () {
       this.timeout(20000)
-      return adapter.build({
-        tag: 'test-image',
-        working: './spec',
-        file: 'Dockerfile.test',
-        cacheFrom: 'test-image:latest'
-      })
-      .should.be.fulfilled
+      return adapter.build(
+        {
+          tag: 'test-image',
+          working: './spec',
+          file: 'Dockerfile.test',
+          cacheFrom: 'test-image:latest'
+        }
+      ).should.be.fulfilled
     })
 
     it('should build image with hash argv, build args and cacheFrom', function () {
       this.timeout(20000)
-      return adapter.build({
-        tag: 'test-image',
-        working: './spec',
-        file: 'Dockerfile.args',
-        cacheFrom: 'test-image:latest',
-        args: {
-          package: 'curl'
+      return adapter.build(
+        {
+          tag: 'test-image',
+          working: './spec',
+          file: 'Dockerfile.args',
+          cacheFrom: 'test-image:latest',
+          args: {
+            package: 'curl'
+          }
         }
-      })
-      .should.be.fulfilled
+      ).should.be.fulfilled
     })
 
     it('should build image with array argv', function () {
       this.timeout(20000)
       return adapter.build(['test-image', './spec', 'Dockerfile.test'])
+        .should.be.fulfilled
+    })
+  })
+
+  describe('container commands', function () {
+    it('should create container', function () {
+      this.timeout(10000)
+      return adapter.create(['test-image:latest', 'temp'])
+        .should.be.fulfilled
+    })
+
+    it('should export container and import to new image', function () {
+      this.timeout(20000)
+      return docker.export('temp')
+        .then(pipe => {
+          return docker.import('pipe', 'test-image:flat', { pipe })
+        })
+        .should.be.fulfilled
+    })
+
+    it('should remove container', function () {
+      return adapter.removeContainer(['temp'])
+        .should.be.fulfilled
+    })
+
+    it('should remove image', function () {
+      return adapter.removeImage(['test-image:flat', '-f'])
         .should.be.fulfilled
     })
   })

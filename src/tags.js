@@ -1,5 +1,5 @@
-var when = require('when')
-var fs = require('fs')
+const when = require('when')
+const fs = require('fs')
 
 function applyTag (docker, source, target) {
   return docker.tag(source, target)
@@ -11,10 +11,10 @@ function buildInfoExists (file) {
 
 function getImageTag (source, tag) {
   // if the source includes a registry with a port, that has to be included in
-  var segments = source.split(':')
-  var slashIndex = source.indexOf('/')
+  const segments = source.split(':')
+  const slashIndex = source.indexOf('/')
   if (slashIndex >= 0) {
-    var colIndex = source.indexOf(':')
+    const colIndex = source.indexOf(':')
     if (colIndex < slashIndex) {
       if (segments.length < 3) {
         return [ source, tag ].join(':')
@@ -56,7 +56,7 @@ function pushTags (docker, source, tag) {
     }, [])
     return when.all(promises)
   } else {
-    var target = tag
+    let target = tag
     if (!tagIsCompleteSpec(tag)) {
       target = getImageTag(source, tag)
     }
@@ -89,7 +89,7 @@ function tagImage (docker, source, tag) {
     }, [])
     return when.all(promises)
   } else {
-    var target = tag
+    let target = tag
     if (!tagIsCompleteSpec(tag)) {
       target = getImageTag(source, tag)
     }

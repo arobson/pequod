@@ -5,6 +5,9 @@ module.exports = function (options) {
   var tagImpl = Tags(docker)
   return {
     build: docker.build,
+    create: docker.create,
+    export: docker.export,
+    import: docker.import,
     info: docker.info,
     login: docker.login,
     pull: docker.pull,

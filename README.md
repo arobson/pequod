@@ -48,6 +48,34 @@ pequod
   } );
 ```
 
+#### create( imageName, [options] )
+
+Creates a container from an image with the following available options:
+
+ * `name` - a string providing a friendly name
+ * `entrypoint` - the entrypoint to use for the container
+ * `env` - a hash of key/value pairs to use as environment variables
+ * `links` - an array of named container links to other containers
+ * `ports` - a hash of key/value pairs to use for host -> container port mappings
+ * `volumes` - a hash of host paths to mount to to container paths
+
+#### exportContainer( container, [options] )
+
+Exports a container either as a tarball or to a pipe with the following options:
+
+ * `output` - the path to the tarball file to save the container's state in
+
+If the `output` option is left off, the call will resolve the output stream which can then be piped to something else.
+
+#### importContainer( source, target, [options])
+
+Imports either a stream or a tarball into a new, single image layer. If `source` is a path to a file, it will use the tarball, if `source` is set to the string `"pipe"` then it will expect the option `pipe` to be set to the stream containing the image.
+
+Options:
+
+ * `changes` - an array of legal Docker image changes to make to the image during import. See [ https://docs.docker.com/engine/reference/commandline/import/#extended-description](Docker's documentation) for details.
+ * `message` - a custom commit message to set when creating the new layer
+
 #### info()
 
 ```js
@@ -59,22 +87,24 @@ pequod
 ```
 
 #### login( user, pass, _server_ )
+
 `server` is optional and defaults to the official Docker hub.
 
 ```js
 pequod
-  .login( "$DOCKER_USER", "$DOCKER_PASS" )
+  .login( '$DOCKER_USER', '$DOCKER_PASS' )
   .then( function( list ) {
     // the list of console lines output
   } );
 ```
 
 #### pull( image )
+
 Pulls an image.
 
 ```js
 pequod
-  .pull( "test-image" )
+  .pull( 'test-image' )
   .then( function( list ) {
     // the list of console lines output
   } );
@@ -85,49 +115,63 @@ Pushes the image.
 
 ```js
 pequod
-  .push( "test-image" )
+  .push( 'test-image' )
   .then( function( list ) {
     // the list of console lines output
   } );
 ```
 
 #### pushTags( image )
+
 Pushes all tags specified in `./.buildinfo.json`.
 
 ```js
-pequod.pushTags( "test-image" );
+pequod.pushTags('test-image');
 ```
 
 #### tag( source, target )
+
 Tags the source image with the specified target tag.
 
 ```js
 pequod
-  .tag( "test-image", "test-image:1.1" )
+  .tag( 'test-image', 'test-image:1.1' )
   .then( function( list ) {
     // the list of console lines output
   } );
 ```
 
 #### tagImage( source )
+
 Tags the source image according to a `./.buildinfo.json`.
 
 ```js
-pequod.tagImage( "test-image" );
+pequod.tagImage('test-image');
 ```
 
-#### removeImage( source )
+#### removeContainer( containerName/containerId )
+
+Removes the container from the local daemon by name or id.
+
+```js
+pequod
+  .removeContainer('')
+```
+
+#### removeImage( imageName )
+
 Removes the image (or untags it).
 
 ```js
 pequod
-  .removeImage( "test-image" )
+  .removeImage( 'test-image' )
   .then( function( list ) {
     // the list of console lines output
   } );
 ```
 
 #### version()
+
 ```js
 pequod
   .version()
