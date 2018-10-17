@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.7.0"></a>
+# [1.7.0](https://github.com/arobson/pequod/compare/v1.5.2...v1.7.0) (2018-10-17)
+
+
+### Features
+
+* add support for build-args in order to support parameterized Dockerfiles better ([607a31d](https://github.com/arobson/pequod/commit/607a31d))
+* add support for create, export, import, and remove container commands ([7d4ae17](https://github.com/arobson/pequod/commit/7d4ae17))
+
+
+
 <a name="1.6.0"></a>
 # [1.6.0](https://github.com/arobson/pequod/compare/v1.5.2...v1.6.0) (2018-01-26)
 
