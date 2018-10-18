@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.7.1"></a>
+## [1.7.1](https://github.com/arobson/pequod/compare/v1.7.0...v1.7.1) (2018-10-18)
+
+
+### Bug Fixes
+
+* make it possible to inspect images and allow for imports to carry important aspects forward ([64d56a8](https://github.com/arobson/pequod/commit/64d56a8))
+
+
+
 <a name="1.7.0"></a>
 # [1.7.0](https://github.com/arobson/pequod/compare/v1.5.2...v1.7.0) (2018-10-17)
 
