@@ -7,7 +7,7 @@ describe('Adapter', function () {
     it('should fail to login with invalid credentials', function () {
       this.timeout(8000)
       return docker.login('testuser', 'passw0rd', 'localhost:5080')
-        .should.be.rejectedWith(Error, 'docker command \'login\', failed with\n Error response from daemon: login attempt to http://localhost:5080/v2/ failed with status: 401 Unauthorized\n')
+        .should.be.rejectedWith(Error, 'docker command \'login\', failed with', '\n Error response from daemon: login attempt to http://localhost:5080/v2/ failed with status: 401 Unauthorized\n')
     })
 
     it('should login successfully with valid credentials', function () {
