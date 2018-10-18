@@ -155,6 +155,13 @@ function importContainer (sudo, log, source, target, options = {}) {
   return exec(sudo, log, false, 'import', argList, options.pipe)
 }
 
+function inspect (sudo, log, image) {
+  return exec(sudo, log, false, 'inspect', image)
+    .then(result => {
+      return JSON.parse(result.join(''))[0]
+    })
+}
+
 function login (sudo, log, user, pass, server) {
   const argList = [ '-u', user, '-p', pass ]
   if (server) {
@@ -203,6 +210,7 @@ module.exports = function (options) {
     export: exportContainer.bind(null, sudo, log),
     import: importContainer.bind(null, sudo, log),
     info: info.bind(null, sudo, log),
+    inspect: inspect.bind(null, sudo, log),
     login: login.bind(null, sudo, log),
     pull: pull.bind(null, sudo, log),
     push: push.bind(null, sudo, log),

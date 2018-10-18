@@ -86,6 +86,111 @@ pequod
   } );
 ```
 
+#### inspect( image )
+
+```js
+pequod.inspect('repo/image:tag')
+  .then( function( data ) {
+    // process data
+  } );
+```
+
+Data structure:
+
+```js
+{
+  Id: 'sha256:[sha]',
+  RepoTags: [
+    'repo/image:tag'
+  ],
+  RepoDigests: [
+    'repo/image@sha256:[sha]'
+  ],
+  Parent: '',
+  Comment: '',
+  Created: 'ISO timestamp',
+  Container: 'attached container id',
+  ContainerConfig: {
+    Hostname: '',
+    Domainname: '',
+    User: '',
+    AttachStdin: Boolean,
+    AttachStdout: Boolean,
+    AttachStderr: Boolean,
+    Tty: Boolean,
+    OpenStdin: Boolean,
+    StdinOnce: Boolean,
+    Env: [
+      'ENV=value'
+    ],
+    Cmd: [
+      '/bin/sh',
+      '-c',
+      '#(nop) ',
+      'CMD [\"/bin/sh\" \"-c\" \"./kick.sh\"]'
+    ],
+    ArgsEscaped: Boolean,
+    Image: 'sha256:[sha]',
+    Volumes: [] | null,
+    WorkingDir: '/',
+    Entrypoint: '' | null,
+    OnBuild: [],
+    Labels: {}
+  },
+  DockerVersion: '',
+  Author: '',
+  Config: {
+    Hostname: '',
+    Domainname: '',
+    User: '',
+    AttachStdin: Boolean,
+    AttachStdout: Boolean,
+    AttachStderr: Boolean,
+    Tty: Boolean,
+    OpenStdin: Boolean,
+    StdinOnce: Boolean,
+    Env: [
+      'ENV=value'
+    ],
+    Cmd: [
+      '/bin/sh',
+      '-c',
+      './kick.sh'
+    ],
+    ArgsEscaped: Boolean,
+    Image: 'sha256:[sha]',
+    Volumes: [] | null,
+    WorkingDir: '/',
+    Entrypoint: '' | null,
+    OnBuild: [],
+    Labels: null
+  },
+  Architecture: 'amd64',
+  Os: 'linux',
+  Size: #,
+  VirtualSize: #,
+  GraphDriver: {
+    Data: {
+      LowerDir: '/var/lib/docker/overlay2...',
+      MergedDir: '',
+      UpperDir: '',
+      WorkDir: ''
+    },
+    Name: 'overlay2'
+  },
+  RootFS: {
+    Type: 'layers',
+    Layers: [
+      'sha256:[sha]',
+      ...
+    ]
+  },
+  Metadata: {
+    LastTagTime: 'ISO '
+  }
+}
+```
+
 #### login( user, pass, _server_ )
 
 `server` is optional and defaults to the official Docker hub.

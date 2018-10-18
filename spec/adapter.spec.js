@@ -56,6 +56,24 @@ describe('Adapter', function () {
       return adapter.build(['test-image', './spec', 'Dockerfile.test'])
         .should.be.fulfilled
     })
+
+    it('should get details back from inspection', function () {
+      this.timeout(10000)
+      return docker.inspect('test-image:latest')
+        .should.partiallyEql({
+          Config: {
+            User: 'root',
+            Env: [
+              'PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
+              'ONE=uno',
+              'TWO=dos'
+            ],
+            Cmd: [ '/bin/sh', '-c', 'this is a ./test' ],
+            WorkingDir: '/my/path',
+            Entrypoint: [ '/bin/sh', '-c', '= [ \'node\', \'/src/server.js\' ]' ]
+          }
+        })
+    })
   })
 
   describe('container commands', function () {

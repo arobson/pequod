@@ -1,3 +1,16 @@
 FROM alpine:3.4
 
 RUN apk --update add curl
+
+WORKDIR /my/path
+
+ENV ONE=uno
+ENV TWO=dos
+
+EXPOSE 80
+EXPOSE 443
+
+USER root
+
+CMD this is a ./test
+ENTRYPOINT = [ 'node', '/src/server.js' ]

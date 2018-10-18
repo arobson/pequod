@@ -9,6 +9,7 @@ module.exports = function (options) {
     export: docker.export,
     import: docker.import,
     info: docker.info,
+    inspect: docker.inspect,
     login: docker.login,
     pull: docker.pull,
     push: docker.push,
