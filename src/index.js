@@ -14,6 +14,7 @@ module.exports = function (options) {
     pull: docker.pull,
     push: docker.push,
     pushTags: tagImpl.pushTags,
+    removeContainer: docker.removeContainer,
     removeImage: docker.removeImage,
     tag: docker.tag,
     tagImage: tagImpl.tagImage,
