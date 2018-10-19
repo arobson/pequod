@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.7.4"></a>
+## [1.7.4](https://github.com/arobson/pequod/compare/v1.7.3...v1.7.4) (2018-10-19)
+
+
+### Bug Fixes
+
+* remove quotes from output argument in export command ([2779d35](https://github.com/arobson/pequod/commit/2779d35))
+
+
+
 <a name="1.7.3"></a>
 ## [1.7.3](https://github.com/arobson/pequod/compare/v1.7.2...v1.7.3) (2018-10-19)
 
