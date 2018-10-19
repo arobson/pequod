@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.7.2"></a>
+## [1.7.2](https://github.com/arobson/pequod/compare/v1.7.1...v1.7.2) (2018-10-19)
+
+
+### Bug Fixes
+
+* remove quotes around change args passed to import to work around odd daemon behavior in conjunction with spawn ([29ac2bb](https://github.com/arobson/pequod/commit/29ac2bb))
+
+
+
 <a name="1.7.1"></a>
 ## [1.7.1](https://github.com/arobson/pequod/compare/v1.7.0...v1.7.1) (2018-10-18)
 
