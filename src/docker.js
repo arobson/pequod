@@ -146,11 +146,13 @@ function importContainer (sudo, log, source, target, options = {}) {
   }
   if (options.changes) {
     options.changes.forEach(change => {
-      argList.unshift(`-c "${change}"`)
+      argList.unshift(`${change}`)
+      argList.unshift(`--change`)
     })
   }
   if (options.message) {
-    argList.unshift(`-m "${options.message}"`)
+    argList.unshift(`"${options.message}"`)
+    argList.unshift(`--message`)
   }
   return exec(sudo, log, false, 'import', argList, options.pipe)
 }

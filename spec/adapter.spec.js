@@ -85,11 +85,43 @@ describe('Adapter', function () {
 
     it('should export container and import to new image', function () {
       this.timeout(20000)
-      return docker.export('temp')
-        .then(pipe => {
-          return docker.import('pipe', 'test-image:flat', { pipe })
-        })
-        .should.be.fulfilled
+      return docker.inspect('test-image:latest')
+        .then(data => {
+          const changes = []
+          const user = data.Config.User
+          const working = data.Config.WorkingDir
+          const env = data.Config.Env || []
+          const ports = Object.keys(data.Config.ExposedPorts || {})
+          const cmd = data.Config.Cmd || []
+          const entry = data.Config.Entrypoint || []
+          if (user) {
+            changes.push(`USER ${user}`)
+          }
+          if (working) {
+            changes.push(`WORKDIR ${working}`)
+          }
+          if (env.length > 0) {
+            env.forEach(e => {
+              changes.push(`ENV ${e}`)
+            })
+          }
+          if (ports.length > 0) {
+            ports.forEach(p => {
+              changes.push(`EXPOSE ${p}`)
+            })
+          }
+          if (cmd.length > 0) {
+            changes.push(`CMD ${JSON.stringify(cmd)}`)
+          }
+          if (entry.length > 0) {
+            changes.push(`ENTRYPOINT ${JSON.stringify(entry)}`)
+          }
+          console.log(changes)
+          return docker.export('temp')
+            .then(pipe => {
+              return docker.import('pipe', 'test-image:flat', { pipe, changes })
+            })
+        }).should.be.fulfilled
     })
 
     it('should remove container', function () {
