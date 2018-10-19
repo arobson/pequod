@@ -116,7 +116,7 @@ function exportContainer (sudo, log, container, options = {}) {
   let pipe = true
   if (options.output) {
     pipe = false
-    argList.unshift(`--output="${options.output}"`)
+    argList.unshift(`--output=${options.output}`)
   }
   return exec(sudo, log, pipe, 'export', argList)
 }
