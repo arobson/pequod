@@ -1,4 +1,3 @@
-const when = require('when')
 const fs = require('fs')
 
 function applyTag (docker, source, target) {
@@ -17,25 +16,25 @@ function getImageTag (source, tag) {
     const colIndex = source.indexOf(':')
     if (colIndex < slashIndex) {
       if (segments.length < 3) {
-        return [ source, tag ].join(':')
+        return [source, tag].join(':')
       } else {
-        return [ segments[ 0 ], segments[ 1 ], tag ].join(':')
+        return [segments[0], segments[1], tag].join(':')
       }
     } else {
-      return [ segments[ 0 ], tag ].join(':')
+      return [segments[0], tag].join(':')
     }
   } else {
-    return [ segments[ 0 ], tag ].join(':')
+    return [segments[0], tag].join(':')
   }
 }
 
 function loadTagsFrom (file) {
-  return when.promise(function (resolve, reject) {
-    fs.readFile(file, 'utf8', function (err, content) {
+  return new Promise((resolve, reject) => {
+    fs.readFile(file, 'utf8', (err, content) => {
       if (err) {
         reject(err)
       } else {
-        var json = JSON.parse(content)
+        const json = JSON.parse(content)
         resolve(json.tag)
       }
     })
@@ -54,7 +53,7 @@ function pushTags (docker, source, tag) {
       }
       return acc
     }, [])
-    return when.all(promises)
+    return Promise.all(promises)
   } else {
     let target = tag
     if (!tagIsCompleteSpec(tag)) {
@@ -87,7 +86,7 @@ function tagImage (docker, source, tag) {
       }
       return acc
     }, [])
-    return when.all(promises)
+    return Promise.all(promises)
   } else {
     let target = tag
     if (!tagIsCompleteSpec(tag)) {

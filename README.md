@@ -4,9 +4,6 @@ A lib and command line utility to help with manipulating the Docker CLI. Built t
 
 Primary use case (for now) is to read the `.buildinfo.json` file and tag a Docker image with all the tags found. Yeah, it _is_ simple, but it turns out this is an immense pain in the neck to pull off in most CIs/bash and pretty simple in Node.
 
-[![Build Status][travis-image]][travis-url]
-[![Coverage Status][coveralls-image]][coveralls-url]
-
 ## Testing
 A local Docker registry for the push integration tests.
 
@@ -286,8 +283,3 @@ pequod
 ```
 
 There's more to it than this, but give this is really the primary reason for its existence, I'm gonna keep things boring for now √
-
-[travis-url]: https://travis-ci.org/npm-wharf/pequod
-[travis-image]: https://travis-ci.org/npm-wharf/pequod.svg?branch=master
-[coveralls-url]: https://coveralls.io/github/npm-wharf/pequod?branch=master
-[coveralls-image]: https://coveralls.io/repos/github/npm-wharf/pequod/badge.svg?branch=master

@@ -1,15 +1,15 @@
 require('./setup')
-var Tags = require('../src/tags.js')
+const Tags = require('../src/tags.js')
 
-var docker = {
+const docker = {
   push: function () {},
   tag: function () {}
 }
 
 describe('Tags', function () {
   describe('when tagging with a full image spec', function () {
-    var dockerMock
-    var tags
+    let dockerMock
+    let tags
     before(function () {
       dockerMock = sinon.mock(docker)
       dockerMock.expects('tag')
@@ -25,8 +25,8 @@ describe('Tags', function () {
   })
 
   describe('when tagging with a tag only', function () {
-    var dockerMock
-    var tags
+    let dockerMock
+    let tags
     before(function () {
       dockerMock = sinon.mock(docker)
       dockerMock.expects('tag')
@@ -42,8 +42,8 @@ describe('Tags', function () {
   })
 
   describe('when tagging with multiple tags', function () {
-    var dockerMock
-    var tags
+    let dockerMock
+    let tags
     before(function () {
       dockerMock = sinon.mock(docker)
       dockerMock.expects('tag')
@@ -59,7 +59,7 @@ describe('Tags', function () {
     })
 
     it('should derive the target from the source spec', function () {
-      return tags.tagImage('repo/image:tag1', [ 'tag2', 'tag3', 'tag4' ])
+      return tags.tagImage('repo/image:tag1', ['tag2', 'tag3', 'tag4'])
         .then(function () {
           return dockerMock.verify()
         })
@@ -67,8 +67,8 @@ describe('Tags', function () {
   })
 
   describe('when tagging from file with single tag', function () {
-    var dockerMock
-    var tags
+    let dockerMock
+    let tags
     before(function () {
       dockerMock = sinon.mock(docker)
       dockerMock.expects('tag')
@@ -86,8 +86,8 @@ describe('Tags', function () {
   })
 
   describe('when tagging from buildinfo.json file', function () {
-    var dockerMock
-    var tags
+    let dockerMock
+    let tags
     before(function () {
       dockerMock = sinon.mock(docker)
       dockerMock.expects('tag')
@@ -108,8 +108,8 @@ describe('Tags', function () {
   })
 
   describe('when pushing tags from tag_file1.json file', function () {
-    var dockerMock
-    var tags
+    let dockerMock
+    let tags
     before(function () {
       dockerMock = sinon.mock(docker)
       dockerMock.expects('push')
@@ -127,8 +127,8 @@ describe('Tags', function () {
   })
 
   describe('when pushing tags from buildinfo.json file', function () {
-    var dockerMock
-    var tags
+    let dockerMock
+    let tags
     before(function () {
       dockerMock = sinon.mock(docker)
       dockerMock.expects('push')

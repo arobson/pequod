@@ -1,8 +1,8 @@
-var Tags = require('./tags')
+const Tags = require('./tags')
 
 module.exports = function (options) {
-  var docker = require('../src/docker.js')(options)
-  var tagImpl = Tags(docker)
+  const docker = require('../src/docker.js')(options)
+  const tagImpl = Tags(docker)
   return {
     build: docker.build,
     create: docker.create,

@@ -1,14 +1,13 @@
-const when = require('when')
 const format = require('util').format
 const spawn = require('child_process').spawn
 const path = require('path')
 
 function exec (sudo, log, pipe, command, args, inputPipe) {
-  return when.promise(function (res, rej) {
+  return new Promise((resolve, reject) => {
     const out = []
-    const err = []
+    let failed = false
     const cmd = sudo ? 'sudo docker' : 'docker'
-    const fullArgs = [ command ].concat(args || [])
+    const fullArgs = [command].concat(args || [])
     const options = {
       stdio: [
         inputPipe ? 'pipe' : 'ignore',
@@ -22,40 +21,33 @@ function exec (sudo, log, pipe, command, args, inputPipe) {
     }
     if (pipe) {
       pid.once('error', data => {
-        err.push(data.toString())
+        failed = true
+        out.push(data.toString())
       })
       pid.stderr.on('data', (data) => {
         log(data.toString())
-        if (/^WARNING!/.test(data.toString())) {
-          out.push(data.toString())
-        } else {
-          err.push(data.toString())
-        }
+        out.push(data.toString())
       })
-      res(pid.stdout)
+      resolve(pid.stdout)
     } else {
-      pid.stdout.on('data', function (data) {
+      pid.stdout.on('data', (data) => {
         log(data.toString())
         out.push(data.toString())
       })
-      pid.stderr.on('data', function (data) {
+      pid.stderr.on('data', (data) => {
         log(data.toString())
-        if (/^WARNING!/.test(data.toString())) {
-          out.push(data.toString())
-        } else {
-          err.push(data.toString())
-        }
+        out.push(data.toString())
       })
-      pid.on('close', function (code) {
-        if (code !== 0 || err.length > 0) {
-          var error = new Error(format("docker command '%s', failed with\n %s", command, err.join('\n')))
+      pid.on('close', (code) => {
+        if (code !== 0 || failed) {
+          const error = new Error(format("docker command '%s', failed with\n %s", command, out.join('\n')))
           error.command = command
           error.args = args
-          error.output = err
+          error.output = out
           error.code = code
-          rej(error)
+          reject(error)
         } else {
-          res(out)
+          resolve(out)
         }
       })
     }
@@ -68,7 +60,7 @@ function build (sudo, log, tag, options = {}) {
   const cacheFrom = options.cacheFrom
   const buildArgs = getBuildArgs(options.args)
   const dockerfilePath = path.resolve(workingPath, file)
-  var args = [ workingPath, '-f', dockerfilePath, '-t', tag ]
+  let args = [workingPath, '-f', dockerfilePath, '-t', tag]
   if (cacheFrom) {
     args = args.concat(['--cache-from', cacheFrom])
   }
@@ -79,7 +71,7 @@ function build (sudo, log, tag, options = {}) {
 }
 
 function create (sudo, log, image, options = {}) {
-  const argList = [ image ]
+  const argList = [image]
   if (options.name) {
     argList.unshift(`--name=${options.name}`)
   }
@@ -112,7 +104,7 @@ function create (sudo, log, image, options = {}) {
 }
 
 function exportContainer (sudo, log, container, options = {}) {
-  const argList = [ container ]
+  const argList = [container]
   let pipe = true
   if (options.output) {
     pipe = false
@@ -138,7 +130,7 @@ function info (sudo, log) {
 }
 
 function importContainer (sudo, log, source, target, options = {}) {
-  const argList = [ target ]
+  const argList = [target]
   if (source && source !== 'pipe') {
     argList.unshift(source)
   } else {
@@ -147,12 +139,12 @@ function importContainer (sudo, log, source, target, options = {}) {
   if (options.changes) {
     options.changes.forEach(change => {
       argList.unshift(`${change}`)
-      argList.unshift(`--change`)
+      argList.unshift('--change')
     })
   }
   if (options.message) {
     argList.unshift(`"${options.message}"`)
-    argList.unshift(`--message`)
+    argList.unshift('--message')
   }
   return exec(sudo, log, false, 'import', argList, options.pipe)
 }
@@ -165,7 +157,7 @@ function inspect (sudo, log, image) {
 }
 
 function login (sudo, log, user, pass, server) {
-  const argList = [ '-u', user, '-p', pass ]
+  const argList = ['-u', user, '-p', pass]
   if (server) {
     argList.push(server)
   }
@@ -181,16 +173,16 @@ function push (sudo, log, image) {
 }
 
 function tag (sudo, log, source, target) {
-  return exec(sudo, log, false, 'tag', [ source, target ])
+  return exec(sudo, log, false, 'tag', [source, target])
 }
 
 function removeContainer (sudo, log, container, options = {}) {
-  const argList = [ container ]
+  const argList = [container]
   if (options.force) {
-    argList.unshift(`-f`)
+    argList.unshift('-f')
   }
   if (options.volumes) {
-    argList.unshift(`-v`)
+    argList.unshift('-v')
   }
   return exec(sudo, log, false, 'rm', argList)
 }

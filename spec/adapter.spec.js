@@ -1,6 +1,6 @@
 require('./setup')
-var docker = require('../src/docker')({ sudo: false })
-var adapter = require('../src/adapter')(docker)
+const docker = require('../src/docker')({ sudo: false })
+const adapter = require('../src/adapter')(docker)
 
 describe('Adapter', function () {
   describe('login', function () {
@@ -20,7 +20,7 @@ describe('Adapter', function () {
   describe('build', function () {
     it('should build image with hash argv', function () {
       this.timeout(20000)
-      return adapter.build({tag: 'test-image', working: './spec', file: 'Dockerfile.test'})
+      return adapter.build({ tag: 'test-image', working: './spec', file: 'Dockerfile.test' })
         .should.be.fulfilled
     })
 
@@ -68,9 +68,9 @@ describe('Adapter', function () {
               'ONE=uno',
               'TWO=dos'
             ],
-            Cmd: [ '/bin/sh', '-c', 'this is a ./test' ],
+            Cmd: ['/bin/sh', '-c', 'this is a ./test'],
             WorkingDir: '/my/path',
-            Entrypoint: [ '/bin/sh', '-c', '= [ \'node\', \'/src/server.js\' ]' ]
+            Entrypoint: ['/bin/sh', '-c', '= [ \'node\', \'/src/server.js\' ]']
           }
         })
     })
@@ -137,29 +137,29 @@ describe('Adapter', function () {
 
   describe('explicit tag', function () {
     it('should tag the docker image', function () {
-      return adapter.tag({ _: [ 'tag', 'alpine:3.4' ], tag: '3.4_custom' })
+      return adapter.tag({ _: ['tag', 'alpine:3.13'], tag: '3.13_custom' })
         .should.be.fulfilled
     })
 
     after(function () {
-      return docker.removeImage('alpine:3.4_custom')
+      return docker.removeImage('alpine:3.13_custom')
     })
   })
 
   describe('abbreviated tag', function () {
     it('should tag the docker image', function () {
-      return adapter.tag({ _: [ 'tag', 'alpine:3.4' ], t: '3.4_custom' })
+      return adapter.tag({ _: ['tag', 'alpine:3.13'], t: '3.13_custom' })
         .should.be.fulfilled
     })
 
     after(function () {
-      return docker.removeImage('alpine:3.4_custom')
+      return docker.removeImage('alpine:3.13_custom')
     })
   })
 
   describe('implicit tag', function () {
     it('should tag the docker image', function () {
-      return adapter.tag({ _: [ 'tag', 'alpine:3.4', 'magic' ] })
+      return adapter.tag({ _: ['tag', 'alpine:3.13', 'magic'] })
         .should.be.fulfilled
     })
 
@@ -171,9 +171,9 @@ describe('Adapter', function () {
   describe('push tag', function () {
     it('should push tag', function () {
       this.timeout(8000)
-      return adapter.tag({ _: [ 'tag', 'alpine:3.4', 'localhost:5080/alpine:custom' ] })
+      return adapter.tag({ _: ['tag', 'alpine:3.13', 'localhost:5080/alpine:custom'] })
         .then(function () {
-          return adapter.pushTags({ _: [ 'pushTags', 'localhost:5080/alpine', 'custom' ] })
+          return adapter.pushTags({ _: ['pushTags', 'localhost:5080/alpine', 'custom'] })
         }).should.be.fulfilled
     })
   })
@@ -181,9 +181,9 @@ describe('Adapter', function () {
   describe('push from build json', function () {
     it('should push tag', function () {
       this.timeout(8000)
-      return adapter.tag({ _: [ 'tag', 'alpine:3.4' ] })
+      return adapter.tag({ _: ['tag', 'alpine:3.13'] })
         .then(function () {
-          return adapter.pushTags({ _: [ 'pushTags', 'localhost:5080/test' ] })
+          return adapter.pushTags({ _: ['pushTags', 'localhost:5080/test'] })
             .then(function (result) {
               console.log(result.join('\n'))
             })

@@ -7,3 +7,5 @@ docker run -d --name pequod-registry \
   -e "REGISTRY_AUTH_HTPASSWD_PATH=/auth/htpasswd" \
   -p 5080:5000 \
   registry:2
+
+docker pull alpine:3.13
